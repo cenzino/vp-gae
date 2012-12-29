@@ -32,6 +32,13 @@ app.add_url_rule('/admin_only', 'admin_only', view_func=views.admin_only)
 app.add_url_rule('/examples/delete/<int:example_id>', view_func=views.delete_example, methods=['POST'])
 
 
+# Posts list page
+app.add_url_rule('/posts', 'list_posts', view_func=views.list_posts, methods=['GET', 'POST'])
+# Posts list page
+app.add_url_rule('/posts/new', 'new_post', view_func=views.new_post, methods=['GET', 'POST'])
+app.add_url_rule('/posts/edit/<int:post_id>', view_func=views.edit_post, methods=['POST'])
+app.add_url_rule('/posts/delete/<int:post_id>', view_func=views.delete_post, methods=['POST'])
+
 ## Error handlers
 # Handle 404 errors
 @app.errorhandler(404)

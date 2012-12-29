@@ -12,8 +12,10 @@ from google.appengine.ext import testbed
 
 from application import app
 
+from application.models import Post, Category
 
-class DemoTestCase(unittest.TestCase):
+
+class PostTestCase(unittest.TestCase):
     def setUp(self):
         # Flask apps testing. See: http://flask.pocoo.org/docs/testing/
         app.config['TESTING'] = True
@@ -28,7 +30,20 @@ class DemoTestCase(unittest.TestCase):
 
     def tearDown(self):
         self.testbed.deactivate()
-
+    
+    def test_new_post(self):
+        p = Post(title="Primo post")
+        p.put()
+        return self.assertEqual(p.title, "Primo post")
+    
+    def test_new_post_with_category(self):
+        c = Category(name='Python')
+        c.put()
+        p = Post(title="Primo Post", category=c)
+        p.put()
+        return self.assertEqual(p.category.name, 'Python')
+    
+    """
     def setCurrentUser(self, email, user_id, is_admin=False):
         os.environ['USER_EMAIL'] = email or ''
         os.environ['USER_ID'] = user_id or ''
@@ -76,7 +91,7 @@ class DemoTestCase(unittest.TestCase):
         rv = self.app.get('/missing')
         assert rv.status == '404 NOT FOUND'
         assert '<h1>Not found</h1>' in rv.data
-
+    """
     
 if __name__ == '__main__':
     unittest.main()

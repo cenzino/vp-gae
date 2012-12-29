@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+
+{% block style_block %}
+    <style type="text/css">
+        table.table { width: 100%; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1 id="">Nuovo Post</h1>
+    <div>&nbsp;</div>
+    <form id="new-post-form" class="well form-horizontal" action="{{ url_for('new_post') }}" method="post" accept-charset="utf-8">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.title) }}
+        {{ render_field(form.text) }}
+        {{ render_field(form.category) }}
+        {{ render_field(form.tags) }}
+        <div class="control-group">
+		    <div class="controls">
+		        <input class="btn btn-primary" type="submit" value="Salva"/>			        
+		    </div>
+		</div>
+    </form>
+{% endblock content %}

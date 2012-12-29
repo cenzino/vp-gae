@@ -15,3 +15,4 @@ GAEMiniProfiler(app)
 
 # Pull in URL dispatch routes
 import urls
+import logging
