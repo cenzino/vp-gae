@@ -52,16 +52,10 @@ class BetterTagListField(TagListField):
                 d[item.lower()] = True
                 yield item
 
-class PostForm(wtf.Form):
-    title = wtf.TextField(u'Titolo', validators=[validators.Required()])
-    text = wtf.TextAreaField(u'Testo')
-    category = wtf.SelectField(u'Categoria', choices=[(g.id, g.name) for g in Category.all()])
-    tags = BetterTagListField(u'Tags')
-
-class PostForm0(wtf.Form):
-    tags = BetterTagListField(u'Tags')
-    
 BasePostForm = model_form(Post, base_class=wtf.Form)
 
-class PostForm2(BasePostForm):
+class PostForm(BasePostForm):
     tags = BetterTagListField(u'Tags')
+
+CategoryForm = model_form(Category, base_class=wtf.Form)
+    

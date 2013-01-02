@@ -43,7 +43,7 @@ class Category(db.Model):
       
 class Post(db.Model):
     """ Modello del Post """
-    title = db.StringProperty(required=True)
+    title = db.StringProperty()
     text = db.TextProperty()
     html = db.TextProperty()
     
@@ -80,5 +80,7 @@ class Post(db.Model):
     
     def put(self, **kwargs):        
         """ Salva il post convertendo il testo markdown in html """
+        if self.title == "":
+            self.title = "(Senza Titolo)"
         self.html = self.text
         return db.Model.put(self, **kwargs)

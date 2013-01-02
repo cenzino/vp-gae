@@ -37,7 +37,15 @@ app.add_url_rule('/posts', 'list_posts', view_func=views.list_posts, methods=['G
 # Posts list page
 app.add_url_rule('/posts/new', 'new_post', view_func=views.new_post, methods=['GET', 'POST'])
 app.add_url_rule('/posts/edit/<int:post_id>', view_func=views.edit_post, methods=['POST'])
-app.add_url_rule('/posts/delete/<int:post_id>', view_func=views.delete_post, methods=['POST'])
+app.add_url_rule('/posts/delete/<int:post_id>', view_func=views.delete_post, methods=['GET','POST'])
+
+app.add_url_rule('/editor/', 'editor', defaults={'post_id': None}, view_func=views.editor, methods=['GET','POST'])
+app.add_url_rule('/editor/<int:post_id>', view_func=views.editor, methods=['GET', 'POST'])
+
+app.add_url_rule('/categories', 'list_categories', view_func=views.list_categories, methods=['GET', 'POST'])
+app.add_url_rule('/categories/new', 'new_category', view_func=views.new_category, methods=['GET', 'POST'])
+app.add_url_rule('/categories/delete/<string:category_name>', view_func=views.delete_category, methods=['POST'])
+app.add_url_rule('/categories/edit/<string:category_name>', view_func=views.edit_category, methods=['POST'])
 
 ## Error handlers
 # Handle 404 errors

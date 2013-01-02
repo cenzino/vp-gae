@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+
+{% block style_block %}
+    <style type="text/css">
+        table.table { width: 100%; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1 id="">Edita Post</h1>
+    <div>&nbsp;</div>
+    <form id="edit-category-form" class="well form-horizontal" action="{{ url_for('edit_category', category_name=category_name) }}" method="post" accept-charset="utf-8">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.name) }}
+        <div class="control-group">
+		    <div class="controls">
+		        <input class="btn btn-primary" type="submit" value="Salva"/>
+		    </div>
+		</div>
+    </form>
+{% endblock content %}
